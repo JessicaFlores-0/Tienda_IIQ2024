@@ -1,0 +1,16 @@
+
+#contenedorTítulo{
+    text-align: center;
+    color: purple;
+        
+}
+
+.parrafoSecundario{
+    front-size: 16px;
+    color: brown;
+}
+
+.notaImportant{
+    color: red;
+    
+}
