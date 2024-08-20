@@ -65,7 +65,7 @@ public class PruebasController {
             @RequestParam(value = "precioSup") double precioSup, Model model) {
         var productos = productoService.metodoJPQL(precioInf, precioSup);
         model.addAttribute("productos", productos);
-        model.addAttribute("precioInf", precioInf);
+        model.addAttribute("totalProductos", precioInf);
         model.addAttribute("precioSup", precioSup);
         return "/pruebas/listado2";
     }
