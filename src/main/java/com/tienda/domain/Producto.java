@@ -1,4 +1,3 @@
-
 package com.tienda.domain;
 
 import jakarta.persistence.*;
@@ -7,11 +6,12 @@ import lombok.Data;
 
 @Data //Crea los set y get automaticamente, ahorra codigo
 @Entity
-@Table(name="producto")
+@Table(name = "producto")
 
-public class Producto implements Serializable{
-    private static final long serialVersionUID=1L;
-    
+public class Producto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
@@ -20,9 +20,12 @@ public class Producto implements Serializable{
     private String detalle;
     private double precio;
     private int existencia;
-    private String rutaImagen; 
+    private String rutaImagen;
     private boolean activo;
-    private Long idCategoria;
+
+    @OneToMany
+    @JoinColumn(name = "id_categoria")
+    Categoria categoria;
 
     public Producto(String descripcion, String detalle, double precio, int existencia, String rutaImagen, boolean activo, Long idCategoria) {
         this.descripcion = descripcion;
@@ -31,6 +34,5 @@ public class Producto implements Serializable{
         this.existencia = existencia;
         this.rutaImagen = rutaImagen;
         this.activo = activo;
-        this.idCategoria = idCategoria;
     }
 }

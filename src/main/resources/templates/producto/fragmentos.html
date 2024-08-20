@@ -41,7 +41,7 @@
                             <div class="modal-body">
                                   <div class="mb-3">
                                     <label for="idCategoria">[[#{producto.categoria}]]</label>
-                                    <select name="idCategoria" class="from-select">
+                                    <select name="categoria.idCategoria" class="from-select">
                                         <option th:each="item : ${categorias}"
                                                 th:value="${item.idCategoria}"
                                                 th:value="${item.descripcion}"></option>
@@ -109,7 +109,7 @@
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${producto.descripcion}]]</td>
                                             <td>[[${producto.detalle}]]</td>
-                                            <td>[[${producto.idCategoria}]]</td>
+                                            <td>[[${producto.categoria.descripcion}]]</td>
                                             <td>[[${producto.precio}]]</td>
                                             <td>[[${producto.existencias}]]</td>
                                             <td th:text="${producto.activo} ? 'Activa' : 'Inactiva'" />
@@ -163,9 +163,9 @@
                                             </div>
                                            <div class="card-body">
                                             <div class="mb-3">
-                                                    <label for="idCategoria">[[#{producto.Categoria}]]</label>
-                                                    <select name="idCategoria" class="from-select"
-                                                        th:field="*{idCategoria}">
+                                                    <label for="categoria.idCategoria">[[#{producto.Categoria}]]</label>
+                                                    <select name="categoria.idCategoria" class="from-select"
+                                                        th:field="*{categoria.idCategoria}">
                                                         <option th:each="item : ${categorias}"
                                                                 th:value="${item.idCategoria}"
                                                                 th:value="${item.descripcion}"></option>

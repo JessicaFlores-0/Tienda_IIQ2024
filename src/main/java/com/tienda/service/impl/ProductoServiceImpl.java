@@ -1,4 +1,5 @@
 package com.tienda.service.impl;
+
 import com.tienda.dao.ProductoDao;
 import com.tienda.domain.Producto;
 import com.tienda.service.ProductoService;
@@ -8,15 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ProductoServiceImpl implements ProductoService{
-    
+public class ProductoServiceImpl implements ProductoService {
+
     @Autowired
-    private ProductoDao ProductoDao;
+    private ProductoDao productoDao;
 
     @Override
     @Transactional(readOnly = true)
     public List<Producto> getProductos(boolean activos) {
-        var lista = ProductoDao.findAll();
+        var lista = productoDao.findAll();
         if (activos) {
             lista.removeIf(e -> !e.isActivo());
         }
@@ -26,18 +27,37 @@ public class ProductoServiceImpl implements ProductoService{
     @Override
     @Transactional(readOnly = true)
     public Producto getProducto(Producto Producto) {
-        return ProductoDao.findById(Producto.getIdProducto()).orElse(null);
+        return productoDao.findById(Producto.getIdProducto()).orElse(null);
     }
 
     @Override
     @Transactional
     public void save(Producto Producto) {
-        ProductoDao.save(Producto);
+        productoDao.save(Producto);
     }
 
     @Override
     @Transactional
     public void delete(Producto Producto) {
-        ProductoDao.delete(Producto);
+        productoDao.delete(Producto);
+    }
+
+    // Lista de productos con precio entre ordendados por descripción ConsultaAmpliada
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup) {
+        return productoDao.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> metodoJPQL(double precioInf, double precioSup) {
+        return productoDao.metodoJPQL(precioInf, precioSup);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> metodoNativo(double precioInf, double precioSup) {
+        return productoDao.metodoNativo(precioInf, precioSup);
     }
 }
